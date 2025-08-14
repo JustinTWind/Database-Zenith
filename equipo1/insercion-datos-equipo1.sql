@@ -3,11 +3,10 @@
 -- =========================================
 INSERT INTO [User] (FullName, Email, PasswordHash, UserType)
 VALUES 
-('Dra. Laura G�mez', 'laura.gomez@zenith.com', 'hash123', 'Professional'),
-('Carlos P�rez', 'carlos.perez@zenith.com', 'hash456', 'Patient'),
+('Dra. Laura Gómez', 'laura.gomez@zenith.com', 'hash123', 'Professional'),
+('Carlos Pérez', 'carlos.perez@zenith.com', 'hash456', 'Patient'),
 ('Mariana Ruiz', 'mariana.ruiz@zenith.com', 'hash789', 'Moderator'),
 ('Dr. Miguel Herrera', 'miguel.herrera@zenith.com', 'hash101', 'Professional'),
-('Luc�a Fern�ndez', 'lucia.fernandez@zenith.com', 'hash202', 'Patient'),
+('Lucía Fernández', 'lucia.fernandez@zenith.com', 'hash202', 'Patient'),
 ('Ana Torres', 'ana.torres@zenith.com', 'hash303', 'Patient'),
 ('Javier Morales', 'javier.morales@zenith.com', 'hash404', 'Moderator');
-
