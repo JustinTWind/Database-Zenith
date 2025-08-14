@@ -3,10 +3,10 @@ Use ZenithDatabase
 
 CREATE TABLE [User] (
   [UserID] int PRIMARY KEY IDENTITY(1, 1),
-  [FullName] varchar(200) NOT NULL,
-  [Email] varchar(150) UNIQUE NOT NULL,
-  [PasswordHash] varchar(256) NOT NULL,
-  [UserType] varchar(50) NOT NULL,
+  [FullName] nvarchar(200) NOT NULL,
+  [Email] nvarchar(150) UNIQUE NOT NULL,
+  [PasswordHash] nvarchar(256) NOT NULL,
+  [UserType] nvarchar(50) NOT NULL,
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
   [UpdatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -15,31 +15,32 @@ GO
 CREATE TABLE [Patient] (
   [PatientID] int PRIMARY KEY,
   [DateOfBirth] date NOT NULL,
-  [Gender] varchar(20),
-  [Address] varchar(250),
-  [PhoneNumber] varchar(20)
+  [Gender] nvarchar(20),
+  [Address] nvarchar(250),
+  [PhoneNumber] nvarchar(20)
 )
 GO
 
 CREATE TABLE [Professional] (
-  [ProfessionalID] int PRIMARY KEY,
-  [LicenseNumber] varchar(50) NOT NULL,
-  [Specialty] varchar(100) NOT NULL,
-  [Description] varchar(MAX),
-  [Photo] varchar(255),
-  [ContactEmail] varchar(150),
-  [Biography] varchar(MAX),
-  [TypeID] int NOT NULL,
-  [CityID] int,
-  [YearsExperience] int NOT NULL,
-  [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
-  [UpdatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
-)
+  [ProfessionalID] INT PRIMARY KEY IDENTITY(1, 1),
+  [UserID] INT NOT NULL, -- Clave foránea hacia User
+  [LicenseNumber] nVARCHAR(50) NOT NULL,
+  [Specialty] NVARCHAR(100) NOT NULL,
+  [Description] NVARCHAR(MAX),
+  [Photo] NVARCHAR(255),
+  [ContactEmail] NVARCHAR(150),
+  [Biography] NVARCHAR(MAX),
+  [TypeID] INT NOT NULL,
+  [CityID] INT,
+  [YearsExperience] INT NOT NULL,
+  [CreatedAt] DATETIME2 NOT NULL DEFAULT (SYSUTCDATETIME()),
+  [UpdatedAt] DATETIME2 NOT NULL DEFAULT (SYSUTCDATETIME())
+);
 GO
 
 CREATE TABLE [Moderator] (
   [ModeratorID] int PRIMARY KEY,
-  [AssignedArea] varchar(100),
+  [AssignedArea] nvarchar(100),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
   [UpdatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -60,9 +61,9 @@ CREATE TABLE [Appointment] (
   [PatientID] int NOT NULL,
   [ProfessionalID] int NOT NULL,
   [AppointmentDateTime] datetime2 NOT NULL,
-  [Modality] varchar(20) NOT NULL,
-  [SessionType] varchar(20) NOT NULL,
-  [Location] varchar(200),
+  [Modality] nvarchar(20) NOT NULL,
+  [SessionType] nvarchar(20) NOT NULL,
+  [Location] nvarchar(200),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
   [UpdatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -86,9 +87,9 @@ CREATE TABLE [EmotionalLog] (
   [LogID] int PRIMARY KEY IDENTITY(1, 1),
   [PatientID] int NOT NULL,
   [LogDate] date NOT NULL,
-  [ScaleType] varchar(50) NOT NULL,
+  [ScaleType] nvarchar(50) NOT NULL,
   [Value] int NOT NULL,
-  [Description] varchar(1000),
+  [Description] nvarchar(1000),
   [SharedWithTherapist] bit NOT NULL DEFAULT (0),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -96,8 +97,8 @@ GO
 
 CREATE TABLE [TherapeuticExercise] (
   [ExerciseID] int PRIMARY KEY IDENTITY(1, 1),
-  [Title] varchar(200) NOT NULL,
-  [Description] varchar(MAX),
+  [Title] nvarchar(200) NOT NULL,
+  [Description] nvarchar(MAX),
   [CreatedByProfessionalID] int,
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -107,7 +108,7 @@ CREATE TABLE [ExerciseAssignment] (
   [AssignmentID] int PRIMARY KEY IDENTITY(1, 1),
   [ExerciseID] int NOT NULL,
   [PatientID] int NOT NULL,
-  [Frequency] varchar(20) NOT NULL,
+  [Frequency] nvarchar(20) NOT NULL,
   [StartDate] date NOT NULL,
   [EndDate] date,
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
@@ -119,7 +120,7 @@ CREATE TABLE [ProgressReport] (
   [PatientID] int NOT NULL,
   [ProfessionalID] int NOT NULL,
   [ReportDate] datetime2 NOT NULL,
-  [Notes] varchar(MAX)
+  [Notes] nvarchar(MAX)
 )
 GO
 
@@ -128,27 +129,27 @@ CREATE TABLE [Feedback] (
   [PatientID] int NOT NULL,
   [ProfessionalID] int NOT NULL,
   [Rating] int NOT NULL,
-  [Comments] varchar(MAX),
+  [Comments] nvarchar(MAX),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
 GO
 
 CREATE TABLE [EventType] (
   [EventTypeID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(100) UNIQUE NOT NULL,
-  [Description] varchar(255)
+  [Name] nvarchar(100) UNIQUE NOT NULL,
+  [Description] nvarchar(255)
 )
 GO
 
 CREATE TABLE [Event] (
   [EventID] int PRIMARY KEY IDENTITY(1, 1),
-  [Title] varchar(200) NOT NULL,
+  [Title] nvarchar(200) NOT NULL,
   [EventTypeID] int NOT NULL,
-  [EventDescription] varchar(MAX),
+  [EventDescription] nvarchar(MAX),
   [StartDate] datetime2 NOT NULL,
   [EventModalityID] int NOT NULL,
   [EndDate] datetime2,
-  [Status] varchar(50) NOT NULL DEFAULT 'Scheduled',
+  [Status] nvarchar(50) NOT NULL DEFAULT 'Scheduled',
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
   [UpdatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -157,15 +158,15 @@ GO
 CREATE TABLE [EventCreator] (
   [EventID] int NOT NULL,
   [UserID] int NOT NULL,
-  [RoleInEvent] varchar(50),
+  [RoleInEvent] nvarchar(50),
   PRIMARY KEY ([EventID], [UserID])
 )
 GO
 
 CREATE TABLE [EventRole] (
   [EventRoleID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(50) UNIQUE NOT NULL,
-  [Description] varchar(200)
+  [Name] nvarchar(50) UNIQUE NOT NULL,
+  [Description] nvarchar(200)
 )
 GO
 
@@ -181,17 +182,17 @@ GO
 CREATE TABLE [EventMedia] (
   [MediaID] int PRIMARY KEY IDENTITY(1, 1),
   [EventID] int NOT NULL,
-  [MediaType] varchar(50) NOT NULL,
-  [MediaURL] varchar(500) NOT NULL,
-  [AltText] varchar(255),
+  [MediaType] nvarchar(50) NOT NULL,
+  [MediaURL] nvarchar(500) NOT NULL,
+  [AltText] nvarchar(255),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
 GO
 
 CREATE TABLE [EventModality] (
   [EventModalityID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(50) UNIQUE NOT NULL,
-  [Description] varchar(MAX)
+  [Name] nvarchar(50) UNIQUE NOT NULL,
+  [Description] nvarchar(MAX)
 )
 GO
 
@@ -200,10 +201,10 @@ CREATE TABLE [MalpracticeReport] (
   [ReporterID] int NOT NULL,
   [ProfessionalID] int NOT NULL,
   [ReportDate] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
-  [Description] varchar(MAX),
-  [Status] varchar(20) NOT NULL DEFAULT 'Pending',
+  [Description] nvarchar(MAX),
+  [Status] nvarchar(20) NOT NULL DEFAULT 'Pending',
   [ResolvedByModeratorID] int,
-  [ResolutionNotes] varchar(MAX)
+  [ResolutionNotes] nvarchar(MAX)
 )
 GO
 
@@ -211,10 +212,10 @@ CREATE TABLE [ClinicalRecord] (
   [RecordID] int PRIMARY KEY IDENTITY(1, 1),
   [PatientID] int NOT NULL,
   [ProfessionalID] int NOT NULL,
-  [Diagnosis] varchar(MAX),
-  [Treatment] varchar(MAX),
-  [Medication] varchar(MAX),
-  [Notes] varchar(MAX),
+  [Diagnosis] nvarchar(MAX),
+  [Treatment] nvarchar(MAX),
+  [Medication] nvarchar(MAX),
+  [Notes] nvarchar(MAX),
   [RecordDate] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
 GO
@@ -232,11 +233,11 @@ GO
 CREATE TABLE [SupportTicket] (
   [TicketID] int PRIMARY KEY IDENTITY(1, 1),
   [UserID] int NOT NULL,
-  [Subject] varchar(200),
-  [Description] varchar(MAX),
+  [Subject] nvarchar(200),
+  [Description] nvarchar(MAX),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
   [ResolvedAt] datetime2,
-  [Status] varchar(20) NOT NULL DEFAULT 'Open',
+  [Status] nvarchar(20) NOT NULL DEFAULT 'Open',
   [AssignedModeratorID] int
 )
 GO
@@ -245,14 +246,14 @@ CREATE TABLE [ContactList] (
   [ContactID] int PRIMARY KEY IDENTITY(1, 1),
   [UserID] int NOT NULL,
   [ContactUserID] int NOT NULL,
-  [Status] varchar(20) NOT NULL,
+  [Status] nvarchar(20) NOT NULL,
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
 GO
 
 CREATE TABLE [ChatRoom] (
   [ChatRoomID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(100),
+  [Name] nvarchar(100),
   [IsGroup] bit NOT NULL DEFAULT (0),
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -270,7 +271,7 @@ CREATE TABLE [Message] (
   [MessageID] int PRIMARY KEY IDENTITY(1, 1),
   [ChatRoomID] int NOT NULL,
   [SenderID] int NOT NULL,
-  [Content] varchar(MAX) NOT NULL,
+  [Content] nvarchar(MAX) NOT NULL,
   [SentAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME()),
   [IsRead] bit NOT NULL DEFAULT (0)
 )
@@ -278,11 +279,11 @@ GO
 
 CREATE TABLE [StatisticType] (
   [StatisticTypeID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(50) UNIQUE NOT NULL,
-  [DisplayName] varchar(100) NOT NULL,
-  [Description] varchar(MAX),
-  [Unit] varchar(20),
-  [AppliesTo] varchar(20)
+  [Name] nvarchar(50) UNIQUE NOT NULL,
+  [DisplayName] nvarchar(100) NOT NULL,
+  [Description] nvarchar(MAX),
+  [Unit] nvarchar(20),
+  [AppliesTo] nvarchar(20)
 )
 GO
 
@@ -297,25 +298,25 @@ GO
 
 CREATE TABLE [ProfessionalType] (
   [TypeID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(50) UNIQUE NOT NULL,
-  [Description] varchar(MAX)
+  [Name] nvarchar(50) UNIQUE NOT NULL,
+  [Description] nvarchar(MAX)
 )
 GO
 
 CREATE TABLE [City] (
   [CityID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(100) NOT NULL,
-  [State] varchar(100),
-  [Country] varchar(100)
+  [Name] nvarchar(100) NOT NULL,
+  [State] nvarchar(100),
+  [Country] nvarchar(100)
 )
 GO
 
 CREATE TABLE [Project] (
   [ProjectID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(200) NOT NULL,
+  [Name] nvarchar(200) NOT NULL,
   [Year] int NOT NULL,
-  [Description] varchar(MAX),
-  [FileUrl] varchar(255),
+  [Description] nvarchar(MAX),
+  [FileUrl] nvarchar(255),
   [ProfessionalID] int NOT NULL,
   [CreatedAt] datetime2 NOT NULL DEFAULT (SYSUTCDATETIME())
 )
@@ -451,6 +452,10 @@ EXEC sp_addextendedproperty
 @level1type = N'Table',  @level1name = 'Project',
 @level2type = N'Column', @level2name = 'FileUrl';
 GO
+
+ALTER TABLE [Professional] ADD FOREIGN KEY ([UserID]) REFERENCES [User]([UserID]);
+GO
+
 
 ALTER TABLE [Patient] ADD FOREIGN KEY ([PatientID]) REFERENCES [User] ([UserID])
 GO
