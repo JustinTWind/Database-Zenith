@@ -1,13 +1,3 @@
---HU043C5 ya estaba hecho 
-INSERT INTO [User] (FullName, Email, PasswordHash, UserType)
-VALUES 
-('Dra. Laura Gómez', 'laura.gomez@zenith.com', 'hash123', 'Professional'),
-('Carlos Pérez', 'carlos.perez@zenith.com', 'hash456', 'Patient'),
-('Mariana Ruiz', 'mariana.ruiz@zenith.com', 'hash789', 'Moderator'),
-('Dr. Miguel Herrera', 'miguel.herrera@zenith.com', 'hash101', 'Professional'),
-('Lucía Fernández', 'lucia.fernandez@zenith.com', 'hash202', 'Patient'),
-('Ana Torres', 'ana.torres@zenith.com', 'hash303', 'Patient'),
-('Javier Morales', 'javier.morales@zenith.com', 'hash404', 'Moderator');
 
 --tipo profesional 
 INSERT INTO [ProfessionalType] ([Name], [Description])

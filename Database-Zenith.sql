@@ -1,5 +1,6 @@
 create database ZenithDatabase
 Use ZenithDatabase
+GO
 
 CREATE TABLE [User] (
   [UserID] int PRIMARY KEY IDENTITY(1, 1),
@@ -279,7 +280,7 @@ GO
 
 CREATE TABLE [StatisticType] (
   [StatisticTypeID] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] nvarchar(50) UNIQUE NOT NULL,
+  [Name] nvarchar(100) UNIQUE NOT NULL,
   [DisplayName] nvarchar(100) NOT NULL,
   [Description] nvarchar(MAX),
   [Unit] nvarchar(20),

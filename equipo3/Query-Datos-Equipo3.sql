@@ -1,15 +1,7 @@
--- 1. Usuarios (Pacientes, Profesionales, Moderadores)
-INSERT INTO [User] (FullName, Email, PasswordHash, UserType)
-VALUES 
-('Dra. Laura Gómez', 'laura.gomez@zenith.com', 'hash123', 'Professional'),
-('Carlos Pérez', 'carlos.perez@zenith.com', 'hash456', 'Patient'),
-('Mariana Ruiz', 'mariana.ruiz@zenith.com', 'hash789', 'Moderator'),
-('Dr. Miguel Herrera', 'miguel.herrera@zenith.com', 'hash101', 'Professional'),
-('Lucía Fernández', 'lucia.fernandez@zenith.com', 'hash202', 'Patient'),
-('Ana Torres', 'ana.torres@zenith.com', 'hash303', 'Patient'),
-('Javier Morales', 'javier.morales@zenith.com', 'hash404', 'Moderator');
 
--- 2. Catálogos
+-- =========================================
+-- 1. Catálogos
+-- =========================================
 INSERT INTO EventModality (Name, Description)
 VALUES
 ('Virtual', 'Evento en línea mediante videollamada'),
@@ -28,7 +20,9 @@ VALUES
 ('Participante', 'Persona que asiste al evento'),
 ('Organizador', 'Persona encargada de la logística y coordinación del evento');
 
--- 3. Eventos
+-- =========================================
+-- 2. Eventos
+-- =========================================
 INSERT INTO Event (Title, EventTypeID, EventDescription, StartDate, EventModalityID, EndDate, Status)
 VALUES
 ('Taller de Mindfulness para Reducir el Estrés', 2, 'Aprende técnicas prácticas de mindfulness para tu vida diaria', '2025-09-15 10:00', 1, '2025-09-15 12:00', 'Scheduled'),
@@ -37,7 +31,9 @@ VALUES
 ('Taller de Comunicación Asertiva', 2, 'Dinámicas y ejercicios para mejorar la comunicación personal y laboral', '2025-10-12 14:00', 2, '2025-10-12 17:00', 'Scheduled'),
 ('Conferencia Internacional de Psicología Positiva', 1, 'Evento híbrido con ponentes internacionales en psicología positiva', '2025-11-01 09:00', 3, '2025-11-01 18:00', 'Scheduled');
 
--- 4. Creadores de eventos
+-- =========================================
+-- 3. Creadores de eventos
+-- =========================================
 INSERT INTO EventCreator (EventID, UserID, RoleInEvent)
 VALUES
 (1, 1, 'Organizador'), -- Dra. Laura Gómez
@@ -46,7 +42,9 @@ VALUES
 (4, 4, 'Organizador'), -- Dr. Miguel Herrera
 (5, 1, 'Ponente');  -- Dra. Laura Gómez
 
--- 5. Medios del evento
+-- =========================================
+-- 4. Medios del evento
+-- =========================================
 INSERT INTO EventMedia (EventID, MediaType, MediaURL, AltText)
 VALUES
 (1, 'Banner', 'https://zenith.com/media/mindfulness-banner.jpg', 'Banner promocional del Taller de Mindfulness'),
@@ -55,7 +53,9 @@ VALUES
 (4, 'Icon', 'https://zenith.com/media/comunicacion-icon.png', 'Ícono del taller de comunicación'),
 (5, 'Banner', 'https://zenith.com/media/psicologia-positiva-banner.jpg', 'Banner de la conferencia internacional');
 
--- 6. Registros de participación
+-- =========================================
+-- 5. Registros de participación
+-- =========================================
 INSERT INTO EventRegistration (EventID, UserID, EventRoleID)
 VALUES
 (1, 2, 2), -- Carlos Pérez como participante en el Taller de Mindfulness

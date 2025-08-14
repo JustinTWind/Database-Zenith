@@ -1,8 +1,6 @@
 
 BEGIN TRANSACTION;
 
-ALTER TABLE StatisticType ALTER COLUMN Name varchar(100);
-
 -- 1. Insertar tipos de estadísticas
 INSERT INTO StatisticType (Name, DisplayName, Description, Unit, AppliesTo)
 VALUES
@@ -20,16 +18,16 @@ GO
 
 INSERT INTO Statistic (UserID, StatisticTypeID, Value, Date)
 VALUES
-(1, 41, 120.00, '2025-08-13'), -- Tiempo Total Sesión En Plataforma
-(1, 50, 85.00,  '2025-08-13'), -- Porcentaje de Cumplimiento
-(2, 42, 10.00,  '2025-08-13'), -- Cantidad de Tests Psicológicos
-(2, 47, 4.50,   '2025-08-13'); -- Calificación Promedio Satisfacción
+(1, 11, 120.00, '2025-08-13'), -- Tiempo Total Sesión En Plataforma
+(1, 12, 85.00,  '2025-08-13'), -- Porcentaje de Cumplimiento
+(2, 13, 10.00,  '2025-08-13'), -- Cantidad de Tests Psicológicos
+(2, 14, 4.50,   '2025-08-13'); -- Calificación Promedio Satisfacción
 
 -- 3. Consultas de verificación
 SELECT * FROM [User];
-SELECT * FROM StatisticType;
+SELECT * FROM StatisticType; --  Hay que fijarse primero en los ID's para poder cambiarlos en la Query de arriba, si se usan ID's que no existen, se jode todo
 SELECT * FROM Statistic;
-GO
+GO 
 
 -- 4. Crear índices para optimizar búsquedas
 CREATE INDEX IX_Statistic_UserID
