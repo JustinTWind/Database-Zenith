@@ -16,6 +16,8 @@ VALUES
   ('Porcentaje De Cumplimiento De Objetivos Terapéuticos', 'Cumplimiento de Objetivos', 'Porcentaje de objetivos terapéuticos cumplidos', '%',        'Usuario');
 GO
 
+-- 2. Insertar Estadísticas
+
 INSERT INTO Statistic (UserID, StatisticTypeID, Value, Date)
 VALUES
 (1, 11, 120.00, '2025-08-13'), -- Tiempo Total Sesión En Plataforma
