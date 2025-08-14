@@ -14,10 +14,27 @@ Tienes **dos opciones** para obtener la base de datos completa:
 
 La forma más rápida y sencilla:
 
-1. **Descarga** el archivo `ZenithDatabase.bak`
-2. **Abre** tu DBMS (SQL Server Management Studio, Azure Data Studio, etc.)
-3. **Restaura** la base de datos desde el archivo .bak
-4. **¡Listo!** 🎉 La base de datos estará completa con todos los datos
+#### Para SQL Server Management Studio (SSMS):
+
+1. **Descarga** el archivo `ZenithDatabase.bak` a tu computadora
+2. **Abre** SQL Server Management Studio
+3. **Conéctate** a tu instancia de SQL Server
+4. **Click derecho** en "Databases" en el Object Explorer
+5. **Selecciona** "Restore Database..."
+6. En la ventana de restauración:
+   - 📍 **Source**: Selecciona "Device"
+   - 🔍 **Click** en el botón "..." para buscar archivos
+   - 📁 **Add**: Navega y selecciona el archivo `ZenithDatabase.bak`
+   - ✅ **OK** para confirmar la selección
+7. En **"Destination"**:
+   - 🏷️ **Database**: Cambia el nombre si deseas (por defecto será "Zenith")
+8. **Click** en "OK" para iniciar la restauración
+9. **¡Listo!** 🎉 La base de datos estará completa con todos los datos
+
+#### Para otros DBMS:
+- **Azure Data Studio**: Usa la extensión SQL Server Admin Pack
+- **DBeaver**: Importa usando la funcionalidad de backup/restore para SQL Server
+
 
 ### 🔧 Opción 2: Creación Manual paso a paso
 
