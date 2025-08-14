@@ -40,9 +40,9 @@ GO
 -- 5. HU043C4 Consultar estadísticas de un usuario específico ordenadas por fecha.
 
 SELECT u.FullName, t.DisplayName, s.Value, s.Date
-FROM tbl_statistic sx
-JOIN tbl_User u ON s.UserID = u.UserID
-JOIN tbl_StatisticType t ON s.StatisticTypeID = t.StatisticTypeID
+FROM Statistic sx
+JOIN [User] u ON s.UserID = u.UserID
+JOIN StatisticType t ON s.StatisticTypeID = t.StatisticTypeID
 WHERE s.UserID = 1
 ORDER BY s.Date;
 
@@ -50,7 +50,7 @@ ORDER BY s.Date;
 
 DECLARE @Fechalimite Date = '2024-01-01';
 
-DELETE FROM tbl_statistic
+DELETE FROM Statistic
 WHERE Date < @Fechalimite;
 
 ROLLBACK;
